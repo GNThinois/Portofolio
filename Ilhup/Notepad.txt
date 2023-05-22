@@ -88,3 +88,15 @@ pip install -r requirements.txt
 ```
 
 Please note that creating an executable with PyInstaller will only work on similar platforms (i.e., if you create the executable on Windows, it will only run on Windows). If you want your program to run on different platforms, you will have to create the executable on those platforms.
+
+-----------------------------------------------
+
+- Homepage + 1 version for each button activated and a confition Displaypage(self, page_id) ?
+
+- Button set value page_id to a number and the frame display_id s'adapte ?
+
+- Mettre en place les scripts "définitifs" avec gestion des erreurs, etc...
+
+- Se renseigner sur les fonctionnalités à mettre en place ? Court terme / Long terme ?
+
+- Possibilité d'intéragir avec Dataloader ?

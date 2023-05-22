@@ -1,10 +1,12 @@
+#tkinter interface + file management
+
 import tkinter as tk
 from tkinter import filedialog, ttk
 import pandas as pd
 import os
 import importlib.util
 
-SCRIPTS_DIR = r"C:\Users\Thinois\PycharmProjects\Portofolio\Ilhup\scripts"
+SCRIPTS_DIR = r"/Ilhup/scripts"
 FILES_DIR = r"C:\Users\Thinois\Desktop\MSA"
 RESULTS_DIR = r"C:\Users\Thinois\Desktop\MSA\FichiersOK"
 

@@ -1,6 +1,11 @@
+#PyQt5 interface
+
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QLabel, QPushButton, QWidget, QSpacerItem, QSizePolicy
 from PyQt5.QtCore import Qt
+from Pages.IS_page import Option_IS
+from Pages.RTCP_page import Example
+
 
 
 class HomePage(QWidget):
@@ -50,42 +55,24 @@ class HomePage(QWidget):
         self.show()
 
     def option1Clicked(self):
-        self.option1_screen = Option1Screen()  # Store reference to Option1Screen
+        self.option1_screen = Option_IS(self)  # Pass the HomePage instance to Option_IS
         self.option1_screen.show()
 
     def option2Clicked(self):
-        print('Option 2 clicked!')
+        self.option2_screen = Example(self)  # Pass the HomePage instance to Option_IS
+        self.option2_screen.show()
 
     def option3Clicked(self):
         print('Option 3 clicked!')
 
-class Option1Screen(QWidget):
-    def __init__(self):
-        super().__init__()
-        self.initUI()
+    def showHomePage(self):
+        self.show()
 
-    def initUI(self):
-        self.setWindowTitle('Option 1 Screen')
-        self.setGeometry(300, 300, 300, 200)
-
-        layout = QVBoxLayout()
-
-        label = QLabel('This is Option 1 Screen!', self)
-        layout.addWidget(label)
-
-        back_button = QPushButton('Back', self)
-        back_button.setStyleSheet('QPushButton {background-color: #555555; color: white; font-size: 16px;}')
-        back_button.clicked.connect(self.goBack)
-        layout.addWidget(back_button)
-
-        self.setLayout(layout)
-
-    def goBack(self):
-        self.close()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     # Set the Fusion style
     app.setStyle('Fusion')
     homePage = HomePage()
+    app.homePage = homePage  # Store reference to the HomePage instance
     sys.exit(app.exec_())

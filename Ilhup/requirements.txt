@@ -1,3 +1,5 @@
 pandas
 openpyxl
 PyQt5
+simple_salesforce
+customtkinter
