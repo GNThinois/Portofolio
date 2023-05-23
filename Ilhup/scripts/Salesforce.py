@@ -3,7 +3,10 @@ from simple_salesforce import Salesforce
 
 
 # Salesforce Login
-
+Contact_ID = "003AZ000002hejbYAA"
+security_token = "tp6dNCvSN469M2Km3vGlwpmi"
+username = "guillaume.nguyen-thi@reseauilhup.com"
+pw = "Lor4hecha@@"
 
 #sf = Salesforce(instance_url='https://ilhup.my.salesforce.com/', session_id='')
 sf = Salesforce(username=username, password=pw, security_token=security_token)

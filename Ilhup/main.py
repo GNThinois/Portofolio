@@ -76,7 +76,7 @@ class App(ctk.CTk):
         super().__init__()
 
         self.title('Application bureau ILHUP')
-        self.geometry('700*500')
+        self.geometry('1100*580')
         self.grid_columnconfigure((0, 1), weight=1)
         self.grid_rowconfigure(0, weight=1)
 
