@@ -120,6 +120,9 @@ class MainFrame1(customtkinter.CTkFrame):
         main_content_label = customtkinter.CTkLabel(self, text="Main Frame 1", font=customtkinter.CTkFont(size=20))
         main_content_label.pack(pady=50)
 
+        self.textbox = customtkinter.CTkTextbox(master=self, width=400, corner_radius=0)
+        self.textbox.insert("0.0", "Some example text!\n" * 50)
+
 class MainFrame2(customtkinter.CTkFrame):
     def __init__(self, master, *args, **kwargs):
         super().__init__(master, *args, **kwargs)
