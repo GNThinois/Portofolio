@@ -3,3 +3,9 @@ openpyxl
 PyQt5
 simple_salesforce
 customtkinter
+tqdm
+
+# Geo
+geopy
+ratelimiter
+requests

@@ -5,7 +5,6 @@ import customtkinter as ctk
 ctk.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 ctk.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
 
-
 class MyTabView(ctk.CTkTabview):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
@@ -13,7 +12,6 @@ class MyTabView(ctk.CTkTabview):
         # create tabs
         self.add("IS")
         self.add("RTCP")
-
 
         # add widgets on tab IS
         self.button1 = ctk.CTkButton(master=self.tab("IS"), text = "Import fichier unique", command= self.import_fichier_unique)
@@ -140,8 +138,6 @@ class App(ctk.CTk):
         print('Ok')
     def action_ABS(self):
         print('Ok')
-
-
 
 if __name__ == "__main__":
     app = App()

@@ -1,12 +1,22 @@
 import os
 import customtkinter
 from PIL import Image
+from scripts import Salesforce_func
+from assets.logins import logins
+from simple_salesforce import Salesforce
+
+# Salesforce Login
+Contact_ID = logins.Contact_ID
+security_token = logins.security_token
+username = logins.username
+pw = logins.pw
 
 width = 1100
 height = 600
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light")
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue")
 
+sf = Salesforce(username=username, password=pw, security_token=security_token)
 class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
@@ -73,7 +83,7 @@ class Header(customtkinter.CTkFrame):
         self.menu_item_2 = customtkinter.CTkButton(self.menu_frame, text="Menu 2", command=self.menu_item_2_clicked)
         self.menu_item_2.pack(side="right", padx=5)
 
-        self.menu_item_3 = customtkinter.CTkButton(self.menu_frame, text="Menu 3", command=self.menu_item_3_clicked)
+        self.menu_item_3 = customtkinter.CTkButton(self.menu_frame, text="Import des ABS", command=self.menu_item_3_clicked)
         self.menu_item_3.pack(side="right", padx=5)
 
     def menu_item_1_clicked(self):
@@ -120,9 +130,6 @@ class MainFrame1(customtkinter.CTkFrame):
         main_content_label = customtkinter.CTkLabel(self, text="Main Frame 1", font=customtkinter.CTkFont(size=20))
         main_content_label.pack(pady=50)
 
-        self.textbox = customtkinter.CTkTextbox(master=self, width=400, corner_radius=0)
-        self.textbox.insert("0.0", "Some example text!\n" * 50)
-
 class MainFrame2(customtkinter.CTkFrame):
     def __init__(self, master, *args, **kwargs):
         super().__init__(master, *args, **kwargs)
@@ -134,8 +141,28 @@ class MainFrame3(customtkinter.CTkFrame):
     def __init__(self, master, *args, **kwargs):
         super().__init__(master, *args, **kwargs)
 
-        main_content_label = customtkinter.CTkLabel(self, text="Main Frame 3", font=customtkinter.CTkFont(size=20))
+        main_content_label = customtkinter.CTkLabel(self, text="Import des ABS", font=customtkinter.CTkFont(size=20))
         main_content_label.pack(pady=50)
+
+        # Creating the Text widget
+        self.text_box = customtkinter.CTkTextbox(self, height=350, width=200)
+        self.text_box.pack(pady=10)
+
+        # Creating the button widget
+        self.process_button = customtkinter.CTkButton(self, text="Process", command=self.process_text)
+        self.process_button.pack(pady=10)
+
+    def process_text(self):
+        # Getting the text from the text box
+        text = self.text_box.get("1.0", "end-1c")
+        # Here is where you process the text
+        i = 0
+        lines = text.splitlines()
+        for line in lines:
+            if line.strip() == "":
+                continue
+            Salesforce_func.add_NIL_to_abs(sf, line)
+
 
 
 if __name__ == "__main__":
