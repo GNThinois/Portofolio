@@ -2,9 +2,11 @@ from ratelimiter import RateLimiter
 from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
 from geopy.exc import GeocoderTimedOut
+from tkinter import filedialog
 from tqdm import tqdm
 from time import sleep
 
+import customtkinter as ct
 import pandas as pd
 import requests
 import sys
@@ -173,16 +175,60 @@ def verify_data(df):
         if not isinstance(value, str):
             print(f"Error at index {index}: {value} is not a string.")
 
+class App:
+    def __init__(self, master):
+        self.master = master
+        master.title("IDE Finder")
+
+        self.label = ct.CTkLabel(master, text="Choisissez les options")  # Changed here
+        self.label.pack()
+
+        self.e1 = ct.CTkEntry(master)  # Changed here
+        self.e1.pack()
+        self.e1.insert(0, "Rue")
+
+        self.e2 = ct.CTkEntry(master)  # Changed here
+        self.e2.pack()
+        self.e2.insert(0, "Ville")
+
+        self.e3 = ct.CTkEntry(master)  # Changed here
+        self.e3.pack()
+        self.e3.insert(0, "Code Postal")
+
+        self.e4 = ct.CTkEntry(master)  # Changed here
+        self.e4.pack()
+        self.e4.insert(0, "Num closest")
+
+        self.button_browse = ct.CTkButton(master, text="Choisir le fichier Excel", command=self.load_file)  # Changed here
+        self.button_browse.pack()
+
+        self.button_run = ct.CTkButton(master, text="Exécuter", command=self.run_main)  # Changed here
+        self.button_run.pack()
+
+    def load_file(self):
+        self.filename = filedialog.askopenfilename(filetypes=[("Excel files", "*.xlsx"), ("All files", "*.*")])
+        print(f"Chargement du fichier: {self.filename}")
+
+    def run_main(self):
+        rue = self.e1.get()
+        ville = self.e2.get()
+        cp = self.e3.get()
+        num_closest = int(self.e4.get())
+        address = f"{rue}, {cp}, {ville}, France"
+
+        # Lire le fichier Excel dans un dataframe
+        df = pd.read_excel(self.filename)
+
+        # Vérifier les données
+        verify_data(df)
+
+        closest_ides = closest_ide(address, df, num_closest)
+        print(closest_ides)
+
+
+root = ct.CTk()
+app = App(root)
+root.mainloop()
+
 if __name__ == '__main__':
-    # Read the Excel file into a pandas DataFrame
-    df = pd.read_excel(os.path.join(os.path.dirname(__file__), '..', 'assets', 'data', 'IDE.xlsx'))
-
-    # Verify the data
-    verify_data(df)
-    print("Data verified")
-
-    address = "Saint-Astier, 24110, France"
-    num_closest = 5  # The number of closest IDEs to return
-
-    closest_ides = closest_ide(address, df, num_closest)
-    print(closest_ides)
+    main()
